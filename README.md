@@ -1,4 +1,3 @@
-# VoidWatch
 # VoidWatch 🛰️
 ### Space Debris Collision Prediction System
 
