@@ -113,13 +113,18 @@ uvicorn main:app --reload
 ```
 
 **5. Test with sample input**
+
+A `sample_input.json` is included in the `api/` folder with a real 
+conjunction event. Use it directly to test the endpoint.
 ```bash
+cd api
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
   -d @sample_input.json
 ```
 
-Once the API is running, open http://localhost:8000/docs in your browser for the interactive testing interface.
+Or once the API is running, open http://localhost:8000/docs 
+in your browser for the interactive testing interface.
 
 ---
 
