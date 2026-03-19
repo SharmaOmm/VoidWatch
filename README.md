@@ -24,13 +24,13 @@ on 162,634 real conjunction events.
 ## Project Structure
 ```
 VoidWatch/
-├── data/raw/          # Raw ESA conjunction dataset
+├── data/raw/              # Raw ESA conjunction dataset
 ├── notebooks/
-│   ├── 01_eda.ipynb           # Exploration, cleaning, feature selection
-│   └── 02_model_training.ipynb # Training and evaluation
-├── model/             # Saved model and feature list
-├── api/               # FastAPI app for local testing
-└── assets/            # Visualizations
+│   ├── 01_eda.ipynb       # Exploration, cleaning, feature selection
+│   └── 02_model_training.ipynb  # Training and evaluation
+├── model/                 # Saved feature list
+├── api/                   # FastAPI app for local testing
+└── assets/                # Visualizations
 ```
 
 ---
@@ -39,9 +39,19 @@ VoidWatch/
 
 This project uses the ESA Collision Avoidance Challenge dataset from Kaggle.
 
-Download it here: https://www.kaggle.com/datasets/shadmanrohan/collisionavoidancechallenge
+Download here: https://www.kaggle.com/datasets/shadmanrohan/collisionavoidancechallenge
 
 Place both files in `data/raw/` before running the notebooks.
+
+---
+
+## Download Trained Model
+
+The trained model is 128MB and hosted on Google Drive.
+
+**Download:** [voidwatch_model.pkl](https://drive.google.com/file/d/1xQcHpxMFGhou6qXqsDzvdm4Csdg0rXL9/view?usp=drive_link)
+
+Place the downloaded file in the `model/` folder before running the API.
 
 ---
 
@@ -59,9 +69,9 @@ Random Forest Classifier trained on 38 orbital features including
 miss distance, relative velocity, position uncertainty (sigma values),
 and Mahalanobis distance. Outputs three risk classes:
 
-- 🔴 HIGH — risk > 10^-5 probability
-- 🟡 MEDIUM — risk between 10^-10 and 10^-5
-- 🟢 LOW — risk < 10^-10 probability
+- 🔴 HIGH — collision probability > 10^-5
+- 🟡 MEDIUM — collision probability between 10^-10 and 10^-5
+- 🟢 LOW — collision probability < 10^-10
 
 **3. API Layer**
 FastAPI endpoint that accepts conjunction features and returns
@@ -84,29 +94,32 @@ and maneuver recommendation.
 
 **1. Clone the repo**
 ```bash
-git clone https://github.com/SharmaOmm/VoidWatch..git
+git clone https://github.com/SharmaOmm/VoidWatch.git
 cd VoidWatch
 ```
 
-**2. Install dependencies**
+**2. Download the trained model**
+Download `voidwatch_model.pkl` from the link above and place it in the `model/` folder.
+
+**3. Install dependencies**
 ```bash
 pip install -r api/requirements.txt
 ```
 
-**3. Run the API**
+**4. Run the API**
 ```bash
 cd api
 uvicorn main:app --reload
 ```
 
-**4. Test with sample input**
+**5. Test with sample input**
 ```bash
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
-  -d @api/sample_input.json
+  -d @sample_input.json
 ```
 
-Or open http://localhost:8000/docs for the interactive interface.
+Or open http://localhost:8000/docs for the interactive testing interface.
 
 ---
 
@@ -139,7 +152,6 @@ Or open http://localhost:8000/docs for the interactive interface.
 - **ML:** scikit-learn, pandas, numpy
 - **API:** FastAPI, uvicorn
 - **Data:** ESA Collision Avoidance Challenge (Kaggle)
-- **Orbital Propagation:** SGP4 (future scope)
 
 ---
 
