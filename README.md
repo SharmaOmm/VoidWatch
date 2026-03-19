@@ -24,13 +24,13 @@ on 162,634 real conjunction events.
 ## Project Structure
 ```
 VoidWatch/
-├── data/raw/              # Raw ESA conjunction dataset
+├── data/              
 ├── notebooks/
-│   ├── 01_eda.ipynb       # Exploration, cleaning, feature selection
-│   └── 02_model_training.ipynb  # Training and evaluation
-├── model/                 # Saved feature list
-├── api/                   # FastAPI app for local testing
-└── assets/                # Visualizations
+│   ├── 01_eda.ipynb       
+│   └── 02_model_training.ipynb  
+├── model/                 
+├── api/                   
+└── assets/                
 ```
 
 ---
